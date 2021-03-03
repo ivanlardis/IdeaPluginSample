@@ -1,0 +1,45 @@
+<idea-plugin>
+    <id>org.example.IdeaPluginDevelopmentSample</id>
+    <name>Plugin display name here</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+<!--        <postStartupActivity implementation="extensions.HelloWorldExtension"/>-->
+
+        <postStartupActivity implementation="extensions.CheckCodeStyleExtension"/>
+
+        <codeInsight.lineMarkerProvider
+            language="JAVA"
+            implementationClass="extensions.ApiLineMarkerProvider"/>
+
+        <localInspection
+            displayName="Rewrite to dagger factory "
+            language="JAVA"
+            enabledByDefault="true"
+            implementationClass="extensions.DaggerFactoryInspection"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+<!--        <action id="actions.HelloWorldAction" class="actions.HelloWorldAction" text="Run Hello World Action">-->
+<!--            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>-->
+<!--        </action>-->
+
+        <action id="com.github.ivanlardis.worktemplate.actions.GenerateDaggerFactoryAction"
+                class="actions.GenerateDaggerFactoryAction"
+                text="Generate Dagger Factory">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
